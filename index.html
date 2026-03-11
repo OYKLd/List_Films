@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ciné28 — Ma Liste de Films</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header>
+    <div class="header-inner">
+      <div class="logo">List<span>Films</span></div>
+      <div class="search-wrap">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+        </svg>
+        <input type="text" id="search" placeholder="Rechercher un film…">
+      </div>
+      <button class="btn-add" onclick="openModal()">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+          <path d="M12 5v14M5 12h14"/>
+        </svg>
+        Ajouter
+      </button>
+    </div>
+  </header>
+
+  <main>
+
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-value" id="stat-total">0</div>
+        <div class="stat-label">Films</div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat">
+        <div class="stat-value" id="stat-seen">0</div>
+        <div class="stat-label">Vus</div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat">
+        <div class="stat-value" id="stat-unseen">0</div>
+        <div class="stat-label">À voir</div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat">
+        <div class="stat-value" id="stat-fav">0</div>
+        <div class="stat-label">Favoris</div>
+      </div>
+    </div>
+
+    <div class="filters">
+      <span class="filter-label">Filtre</span>
+      <button class="filter-btn active" data-filter="all">Tous</button>
+      <button class="filter-btn" data-filter="unseen">À voir</button>
+      <button class="filter-btn" data-filter="seen">Vus</button>
+      <button class="filter-btn" data-filter="fav">⭐ Favoris</button>
+      <button class="sort-btn" id="sortBtn" onclick="toggleSort()">
+        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M3 6h18M7 12h10M11 18h2"/>
+        </svg>
+        <span id="sortLabel">Récent</span>
+      </button>
+    </div>
+
+    <div id="grid">
+      <div id="empty">
+        <svg width="80" height="80" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24">
+          <rect x="2" y="2" width="20" height="20" rx="3"/>
+          <path d="M7 2v20M17 2v20M2 12h20M2 7h5M2 17h5M17 7h5M17 17h5"/>
+        </svg>
+        <h2>Aucun film trouvé</h2>
+        <p>Ajoutez votre premier film ou modifiez les filtres.</p>
+      </div>
+    </div>
+
+  </main>
+
+  <div class="modal-backdrop" id="modalBackdrop" onclick="closeModalOutside(event)">
+    <div class="modal">
+      <div class="modal-header">
+        <div class="modal-title">Nouveau Film</div>
+        <button class="modal-close" onclick="closeModal()">✕</button>
+      </div>
+      <div class="form-grid">
+        <div class="field">
+          <label>Titre *</label>
+          <input type="text" id="f-title" placeholder="Ex: Inception" required>
+        </div>
+        <div class="form-row">
+          <div class="field">
+            <label>Genre</label>
+            <select id="f-genre">
+              <option value="">— Choisir —</option>
+              <option>Action</option>
+              <option>Aventure</option>
+              <option>Animation</option>
+              <option>Comédie</option>
+              <option>Crime</option>
+              <option>Documentaire</option>
+              <option>Drame</option>
+              <option>Fantaisie</option>
+              <option>Horreur</option>
+              <option>Romance</option>
+              <option>Science-fiction</option>
+              <option>Thriller</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Année</label>
+            <input type="number" id="f-year" placeholder="2024" min="1900" max="2030">
+          </div>
+        </div>
+        <div class="field">
+          <label>Affiche (URL image)</label>
+          <input type="url" id="f-poster" placeholder="https://…">
+        </div>
+        <div class="field">
+          <label>Note personnelle</label>
+          <textarea id="f-note" placeholder="Pourquoi ce film m'intéresse…"></textarea>
+        </div>
+        <button class="btn-submit" onclick="addFilm()">Ajouter à la liste</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
